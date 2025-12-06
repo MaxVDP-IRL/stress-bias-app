@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stress Bias Log</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Stress Bias Log</h1>
+    <nav>
+      <button class="tab-button active" data-tab="capture">Capture</button>
+      <button class="tab-button" data-tab="actions">Actions</button>
+      <button class="tab-button" data-tab="review">Review</button>
+      <button class="tab-button" data-tab="insights">Insights</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Capture tab -->
+    <section id="capture" class="tab active">
+      <h2>New Stress Entry</h2>
+      <form id="capture-form">
+        <label>
+          Trigger
+          <textarea name="trigger" required></textarea>
+        </label>
+
+        <label>
+          Interpretation
+          <textarea name="interpretation" required></textarea>
+        </label>
+
+        <label>
+          Domain
+          <select name="domain" required>
+            <option value="Work">Work</option>
+            <option value="Family">Family</option>
+            <option value="Health">Health</option>
+            <option value="Money">Money</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
+
+        <label>
+          Predicted severity (0–10)
+          <input type="range" name="predictedSeverity" min="0" max="10" value="5" oninput="document.getElementById('predicted-value').textContent = this.value">
+          <span id="predicted-value">5</span>
+        </label>
+
+        <fieldset>
+          <legend>Is this actionable?</legend>
+          <label>
+            <input type="radio" name="isActionable" value="yes" checked>
+            Yes
+          </label>
+          <label>
+            <input type="radio" name="isActionable" value="no">
+            No
+          </label>
+        </fieldset>
+
+        <label id="next-action-wrapper">
+          Next action (smallest concrete step)
+          <textarea name="nextAction"></textarea>
+        </label>
+
+        <button type="submit">Save entry</button>
+        <p id="save-status" class="status"></p>
+      </form>
+    </section>
+
+    <!-- Actions tab -->
+    <section id="actions" class="tab">
+      <h2>Open Actions</h2>
+      <div id="actions-list"></div>
+
+      <h3>Non-actionable (active)</h3>
+      <div id="noise-list"></div>
+    </section>
+
+    <!-- Review tab -->
+    <section id="review" class="tab">
+      <h2>Outcome Review</h2>
+      <p>Entries older than 24 hours without an outcome.</p>
+      <div id="review-list"></div>
+    </section>
+
+    <!-- Insights tab -->
+    <section id="insights" class="tab">
+      <h2>Insights</h2>
+      <div id="insights-content"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
